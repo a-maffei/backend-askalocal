@@ -1,4 +1,42 @@
 const Users = require("../models/Users.js");
+const jwt = require("jsonwebtoken");
+
+const createToken = (_id) => {
+  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "1h" });
+};
+
+//login
+const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await Users.login(email, password);
+
+    //create token
+    const token = createToken(user._id);
+
+    res.status(200).send({ email, token }); //check if works otherwise res.status(200).json({email, token})
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
+};
+
+// username.emailsp.textfield
+// username.phonep.textfield
+
+//signup user
+const signUpUser = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await Users.signup(email, password);
+    //create token
+    const token = createToken(user._id);
+    res.status(200).send({ email, token });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
 const getAllUsers = async (req, res) => {
   try {
@@ -104,6 +142,8 @@ const deleteUser = async (req, res) => {
 };
 
 module.exports = {
+  loginUser,
+  signUpUser,
   getAllUsers,
   getOneUser,
   createUser,

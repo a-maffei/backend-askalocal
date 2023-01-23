@@ -2,20 +2,27 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 require("dotenv").config();
-// const mongoose = require('mongoose')
 const connectDB = require("./dbinit");
 const { default: mongoose } = require("mongoose");
+const morgan = require("morgan");
+const bodyParser = require("body-parser");
+
+const userRoutes = require("./routes/userRoutes");
 
 const PORT = process.env.PORT || 8080;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: true }));
+app.use(morgan("dev"));
+app.use(bodyParser.json());
 
 connectDB();
 
 app.get("/", (req, res) => res.send("Welcome to Ask A Local"));
 
+app.use("/user", userRoutes);
+
 app.listen(PORT, () => {
-  `Listening to locals speaking at port ${PORT}`;
+  console.log(`Listening to locals speaking at port ${PORT}`);
 });
