@@ -4,9 +4,11 @@ const cors = require("cors");
 require("dotenv").config();
 const connectDB = require("./dbinit");
 const { default: mongoose } = require("mongoose");
+
 const morgan = require("morgan");
 
 const userRoutes = require("./routes/userRoutes");
+const localRoutes = require("./routes/localRoutes");
 
 const PORT = process.env.PORT || 8080;
 
@@ -25,6 +27,7 @@ connectDB();
 
 app.get("/", (req, res) => res.send("Welcome to Ask A Local"));
 
+app.use("/local", localRoutes);
 app.use("/user", userRoutes);
 
 app.listen(PORT, () => {
