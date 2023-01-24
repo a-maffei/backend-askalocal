@@ -27,7 +27,7 @@ connectDB();
 
 app.get("/", (req, res) => res.send("Welcome to Ask A Local"));
 
-app.use("/locals", localRoutes);
+app.use("/local", localRoutes);
 app.use("/user", userRoutes);
 
 app.listen(PORT, () => {
