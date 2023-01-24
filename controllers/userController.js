@@ -23,16 +23,15 @@ const loginUser = async (req, res) => {
 
 //signup user
 const signUpUser = async (req, res) => {
-  const { email, password, city, zip, street, phone, firstname, lastname } =
-    req.body;
+  const { email, password, city, phone, firstname, lastname } = req.body;
 
   try {
     const user = await Users.signup(
       email,
       password,
       city,
-      zip,
-      street,
+      // zip,
+      // street,
       phone,
       firstname,
       lastname
