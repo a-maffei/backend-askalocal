@@ -15,13 +15,13 @@ const PORT = process.env.PORT || 8080;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: true }));
-app.use(morgan("dev"));
-// morgan.token("body", (req) => {
-//   return JSON.stringify(req.body);
-//});
-// app.use(
-//   morgan(":method :url :status :body :response-time ms - :res[content-length]")
-// );
+// app.use(morgan("dev"));
+morgan.token("body", (req) => {
+  return JSON.stringify(req.body);
+});
+app.use(
+  morgan(":method :url :status :body :response-time ms - :res[content-length]")
+);
 
 connectDB();
 
