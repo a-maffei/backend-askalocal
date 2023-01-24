@@ -5,6 +5,7 @@ require("dotenv").config();
 // const mongoose = require('mongoose')
 const connectDB = require("./dbinit");
 const { default: mongoose } = require("mongoose");
+const localRoutes = require("./routes/localRoutes");
 
 const PORT = process.env.PORT || 8080;
 
@@ -15,6 +16,8 @@ app.use(cors({ origin: true }));
 connectDB();
 
 app.get("/", (req, res) => res.send("Welcome to Ask A Local"));
+
+app.use("/locals", localRoutes);
 
 app.listen(PORT, () => {
   `Listening to locals speaking at port ${PORT}`;
