@@ -5,7 +5,6 @@ require("dotenv").config();
 const connectDB = require("./dbinit");
 const { default: mongoose } = require("mongoose");
 const morgan = require("morgan");
-const bodyParser = require("body-parser");
 
 const userRoutes = require("./routes/userRoutes");
 
@@ -15,7 +14,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: true }));
 app.use(morgan("dev"));
-app.use(bodyParser.json());
 
 connectDB();
 

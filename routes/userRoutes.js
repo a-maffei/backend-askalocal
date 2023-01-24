@@ -16,4 +16,10 @@ app.route("/").get(getAllUsers).post(createUser);
 
 app.route("/:id").get(getOneUser).put(updateUser).delete(deleteUser);
 
+//login
+app.post("/login", loginUser);
+
+//signup
+app.post("/signup", signUpUser);
+
 module.exports = app;

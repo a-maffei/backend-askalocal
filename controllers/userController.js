@@ -15,14 +15,11 @@ const loginUser = async (req, res) => {
     //create token
     const token = createToken(user._id);
 
-    res.status(200).send({ email, token }); //check if works otherwise res.status(200).json({email, token})
+    res.status(200).json({ email, token }); //check if works otherwise res.status(200).json({email, token})
   } catch (error) {
-    res.status(400).send({ error: error.message });
+    res.status(400).json({ error: error.message });
   }
 };
-
-// username.emailsp.textfield
-// username.phonep.textfield
 
 //signup user
 const signUpUser = async (req, res) => {
@@ -32,7 +29,7 @@ const signUpUser = async (req, res) => {
     const user = await Users.signup(email, password);
     //create token
     const token = createToken(user._id);
-    res.status(200).send({ email, token });
+    res.status(200).json({ email, token });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
