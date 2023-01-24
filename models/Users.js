@@ -5,16 +5,16 @@ const validator = require("validator");
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({
-  name: {
-    firstname: {
-      type: String,
-      require: true,
-    },
-    lastname: {
-      type: String,
-      required: true,
-    },
+  // name: {
+  firstname: {
+    type: String,
+    require: true,
   },
+  lastname: {
+    type: String,
+    required: true,
+  },
+  // },
   email: {
     type: String,
     trim: true,
@@ -31,27 +31,36 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  address: {
-    street: {
-      type: String,
-      required: true,
-    },
-    zip: {
-      type: String,
-      required: true,
-    },
-    city: {
-      type: String,
-      required: true,
-    },
-  },
-  pic: {
+  // address: {
+  // street: {
+  //   type: String,
+  //   required: true,
+  // },
+  // zip: {
+  //   type: String,
+  //   required: true,
+  // },
+  city: {
     type: String,
     required: true,
   },
+  // },
+  pic: {
+    type: String,
+    // required: true,
+  },
 });
 
-UserSchema.statics.signup = async function (email, password) {
+UserSchema.statics.signup = async function (
+  email,
+  password,
+  city,
+  // zip,
+  // street,
+  phone,
+  firstname,
+  lastname
+) {
   const exists = await this.findOne({ email });
 
   if (exists) {
@@ -76,7 +85,16 @@ UserSchema.statics.signup = async function (email, password) {
 
   const hash = await bcrypt.hash(password, salt);
 
-  const user = await this.create({ email, password: hash });
+  const user = await this.create({
+    email,
+    password: hash,
+    city,
+    // zip,
+    // street,
+    phone,
+    firstname,
+    lastname,
+  });
 
   return user;
 };
