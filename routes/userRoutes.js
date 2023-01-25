@@ -1,4 +1,6 @@
 const express = require("express");
+const multer = require("multer");
+const upload = require("../multerConfig");
 
 const app = express.Router();
 
@@ -20,6 +22,8 @@ app.route("/:id").get(getOneUser).put(updateUser).delete(deleteUser);
 app.post("/login", loginUser);
 
 //signup
-app.post("/signup", signUpUser);
+app.post("/signup", upload.single("pic"), signUpUser);
 
+/* app.post("/pic", upload.single("pic"), picUpload);
+ */
 module.exports = app;

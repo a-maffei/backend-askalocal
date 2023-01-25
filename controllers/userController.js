@@ -11,7 +11,6 @@ const loginUser = async (req, res) => {
 
   try {
     const user = await Users.login(email, password);
-
     //create token
     const token = createToken(user._id);
 
@@ -24,6 +23,8 @@ const loginUser = async (req, res) => {
 //signup user
 const signUpUser = async (req, res) => {
   const { email, password, city, phone, firstname, lastname } = req.body;
+  const pic = req.file.path;
+
 
   try {
     const user = await Users.signup(
@@ -34,8 +35,10 @@ const signUpUser = async (req, res) => {
       // street,
       phone,
       firstname,
-      lastname
+      lastname,
+      pic
     );
+    console.log(user);
     //create token
     const token = createToken(user._id);
     res.status(200).json({ email, token });
@@ -70,17 +73,8 @@ const getOneUser = async (req, res) => {
 
 const createUser = async (req, res) => {
   try {
-    const {
-      firstname,
-      lastname,
-      email,
-      password,
-      phone,
-      street,
-      zip,
-      city,
-      pic,
-    } = req.body;
+    const { firstname, lastname, email, password, phone, street, zip, city } =
+      req.body;
     const user = await Users.create({
       firstname,
       lastname,
@@ -90,7 +84,6 @@ const createUser = async (req, res) => {
       street,
       zip,
       city,
-      pic,
     });
     res.status(201).json({
       success: true,
