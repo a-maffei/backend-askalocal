@@ -16,8 +16,8 @@ const PORT = process.env.PORT || 8080;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: true }));
+
 app.use(morgan("dev"));
-app.use("/uploads", express.static("./uploads"));
 // morgan.token("body", (req) => {
 //   return JSON.stringify(req.body);
 //});
