@@ -47,7 +47,8 @@ const UserSchema = new Schema({
   // },
   pic: {
     type: String,
-    // required: true,
+    /*     data: Buffer,
+    contentType: String, */
   },
 });
 
@@ -59,7 +60,8 @@ UserSchema.statics.signup = async function (
   // street,
   phone,
   firstname,
-  lastname
+  lastname,
+  pic
 ) {
   const exists = await this.findOne({ email });
 
@@ -94,6 +96,7 @@ UserSchema.statics.signup = async function (
     phone,
     firstname,
     lastname,
+    pic,
   });
 
   return user;

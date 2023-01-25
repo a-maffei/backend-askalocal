@@ -4,6 +4,7 @@ const cors = require("cors");
 require("dotenv").config();
 const connectDB = require("./dbinit");
 const { default: mongoose } = require("mongoose");
+const multer = require("multer");
 
 const morgan = require("morgan");
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: true }));
 app.use(morgan("dev"));
+app.use("/uploads", express.static("./uploads"));
 // morgan.token("body", (req) => {
 //   return JSON.stringify(req.body);
 //});
