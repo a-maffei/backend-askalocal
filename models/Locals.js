@@ -48,76 +48,78 @@ const LocalSchema = new Schema({
   language: {
     type: String,
   },
-  emailP: {
-    category: {
-      type: String,
+  categories: {
+    emailP: {
+      category: {
+        type: String,
+      },
+      textfield: {
+        type: String,
+        max: 50,
+      },
+      price: {
+        type: Number,
+      },
     },
-    textfield: {
-      type: String,
-      max: 50,
+    callP: {
+      category: {
+        type: String,
+      },
+      textfield: {
+        type: String,
+        max: 50,
+      },
+      price: {
+        type: Number,
+      },
     },
-    price: {
-      type: Number,
+    flatP: {
+      category: {
+        type: String,
+      },
+      textfield: {
+        type: String,
+        max: 50,
+      },
+      price: {
+        type: Number,
+      },
     },
-  },
-  callP: {
-    category: {
-      type: String,
+    appointmentP: {
+      category: {
+        type: String,
+      },
+      textfield: {
+        type: String,
+        max: 50,
+      },
+      price: {
+        type: Number,
+      },
     },
-    textfield: {
-      type: String,
-      max: 50,
+    serviceP: {
+      category: {
+        type: String,
+      },
+      textfield: {
+        type: String,
+        max: 50,
+      },
+      price: {
+        type: Number,
+      },
     },
-    price: {
-      type: Number,
-    },
-  },
-  flatP: {
-    category: {
-      type: String,
-    },
-    textfield: {
-      type: String,
-      max: 50,
-    },
-    price: {
-      type: Number,
-    },
-  },
-  appointmentP: {
-    category: {
-      type: String,
-    },
-    textfield: {
-      type: String,
-      max: 50,
-    },
-    price: {
-      type: Number,
-    },
-  },
-  serviceP: {
-    category: {
-      type: String,
-    },
-    textfield: {
-      type: String,
-      max: 50,
-    },
-    price: {
-      type: Number,
-    },
-  },
-  interviewP: {
-    category: {
-      type: String,
-    },
-    textfield: {
-      type: String,
-      max: 50,
-    },
-    price: {
-      type: Number,
+    interviewP: {
+      category: {
+        type: String,
+      },
+      textfield: {
+        type: String,
+        max: 50,
+      },
+      price: {
+        type: Number,
+      },
     },
   },
 });
