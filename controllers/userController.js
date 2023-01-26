@@ -25,14 +25,11 @@ const signUpUser = async (req, res) => {
   const { email, password, city, phone, firstname, lastname } = req.body;
   const pic = req.file.path;
 
-
   try {
     const user = await Users.signup(
       email,
       password,
       city,
-      // zip,
-      // street,
       phone,
       firstname,
       lastname,
