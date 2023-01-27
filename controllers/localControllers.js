@@ -1,4 +1,9 @@
 const Local = require("../models/Locals");
+const jwt = require("jsonwebtoken");
+
+const createToken = (_id) => {
+  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "1h" });
+};
 
 const loginLocal = async (req, res) => {
   const { email, password } = req.body;
@@ -24,7 +29,8 @@ const loginLocal = async (req, res) => {
 const signUpLocal = async (req, res) => {
   const { email, password, city, phone, firstname, lastname } = req.body;
   const pic = req.file.path;
-  console.log(req);
+  console.log("req.body", req.body, pic);
+
   try {
     const local = await Local.signup(
       email,
@@ -35,11 +41,11 @@ const signUpLocal = async (req, res) => {
       lastname,
       pic
     );
-    console.log(local);
+    console.log("2ndlocal", local);
     //create token
     const token = createToken(local._id);
     res.status(200).json({
-      email,
+      email: local.email,
       token,
       pic: local.pic,
       firstname: local.firstname,

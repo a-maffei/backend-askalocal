@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const validator = require("validator");
 
 const { Schema } = mongoose;
 
@@ -42,86 +44,87 @@ const LocalSchema = new Schema({
     type: String,
     required: true,
   },
-  bio: {
-    type: String,
-  },
-  language: {
-    type: String,
-  },
-  categories: {
-    emailP: {
-      category: {
-        type: String,
-      },
-      textfield: {
-        type: String,
-        max: 50,
-      },
-      price: {
-        type: Number,
-      },
-    },
-    callP: {
-      category: {
-        type: String,
-      },
-      textfield: {
-        type: String,
-        max: 50,
-      },
-      price: {
-        type: Number,
-      },
-    },
-    flatP: {
-      category: {
-        type: String,
-      },
-      textfield: {
-        type: String,
-        max: 50,
-      },
-      price: {
-        type: Number,
-      },
-    },
-    appointmentP: {
-      category: {
-        type: String,
-      },
-      textfield: {
-        type: String,
-        max: 50,
-      },
-      price: {
-        type: Number,
-      },
-    },
-    serviceP: {
-      category: {
-        type: String,
-      },
-      textfield: {
-        type: String,
-        max: 50,
-      },
-      price: {
-        type: Number,
-      },
-    },
-    interviewP: {
-      category: {
-        type: String,
-      },
-      textfield: {
-        type: String,
-        max: 50,
-      },
-      price: {
-        type: Number,
-      },
-    },
-  },
+  // bio: {
+  //   type: String,
+  // },
+  // language: {
+  //   type: String,
+  // }
+  //,
+  // categories: {
+  //   emailP: {
+  //     category: {
+  //       type: String,
+  //     },
+  //     textfield: {
+  //       type: String,
+  //       max: 50,
+  //     },
+  //     price: {
+  //       type: Number,
+  //     },
+  //   },
+  //   callP: {
+  //     category: {
+  //       type: String,
+  //     },
+  //     textfield: {
+  //       type: String,
+  //       max: 50,
+  //     },
+  //     price: {
+  //       type: Number,
+  //     },
+  //   },
+  //   flatP: {
+  //     category: {
+  //       type: String,
+  //     },
+  //     textfield: {
+  //       type: String,
+  //       max: 50,
+  //     },
+  //     price: {
+  //       type: Number,
+  //     },
+  //   },
+  //   appointmentP: {
+  //     category: {
+  //       type: String,
+  //     },
+  //     textfield: {
+  //       type: String,
+  //       max: 50,
+  //     },
+  //     price: {
+  //       type: Number,
+  //     },
+  //   },
+  //   serviceP: {
+  //     category: {
+  //       type: String,
+  //     },
+  //     textfield: {
+  //       type: String,
+  //       max: 50,
+  //     },
+  //     price: {
+  //       type: Number,
+  //     },
+  //   },
+  //   interviewP: {
+  //     category: {
+  //       type: String,
+  //     },
+  //     textfield: {
+  //       type: String,
+  //       max: 50,
+  //     },
+  //     price: {
+  //       type: Number,
+  //     },
+  //   },
+  // },
 });
 
 /* FILTERS
