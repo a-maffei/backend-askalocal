@@ -48,6 +48,9 @@ const LocalSchema = new Schema({
   language: {
     type: String,
   },
+  reviews: {
+    type: [String],
+  },
   categories: {
     emailP: {
       category: {

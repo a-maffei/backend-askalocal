@@ -33,5 +33,5 @@ app.use("/local", localRoutes);
 app.use("/user", userRoutes);
 
 app.listen(PORT, () => {
-  console.log(`Listening to locals speaking at port ${PORT}`);
+  console.log(`Server is listening on http://localhost:${PORT}`);
 });
