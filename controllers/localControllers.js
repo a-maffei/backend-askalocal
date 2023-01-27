@@ -1,5 +1,56 @@
 const Local = require("../models/Locals");
 
+const loginLocal = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const local = await Local.login(email, password);
+    //create token
+    const token = createToken(local._id);
+
+    res.status(200).json({
+      email,
+      token,
+      pic: local.pic,
+      firstname: local.firstname,
+      lastname: local.lastname,
+      city: local.city,
+    });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const signUpLocal = async (req, res) => {
+  const { email, password, city, phone, firstname, lastname } = req.body;
+  const pic = req.file.path;
+  console.log(req);
+  try {
+    const local = await Local.signup(
+      email,
+      password,
+      city,
+      phone,
+      firstname,
+      lastname,
+      pic
+    );
+    console.log(local);
+    //create token
+    const token = createToken(local._id);
+    res.status(200).json({
+      email,
+      token,
+      pic: local.pic,
+      firstname: local.firstname,
+      lastname: local.lastname,
+      city: local.city,
+    });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 const getAllLocals = async (req, res) => {
   try {
     const locals = await Local.find();
@@ -145,4 +196,6 @@ module.exports = {
   createLocal,
   updateLocal,
   deleteLocal,
+  loginLocal,
+  signUpLocal,
 };
