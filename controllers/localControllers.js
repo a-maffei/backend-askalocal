@@ -196,6 +196,17 @@ const deleteLocal = async (req, res) => {
   }
 };
 
+const addReview = (req , res) => {
+  Local.findById(req.params.id, (err , local) => {
+    if(err) return res.status(500).send(err);
+    local.reviews.push(req.body.review);
+    local.save((err , updateLocal) => {
+      if(err) return res.status(500).send(err);
+      res.send(updateLocal)
+    })
+  })
+}
+
 module.exports = {
   getAllLocals,
   getOneLocal,
@@ -204,4 +215,5 @@ module.exports = {
   deleteLocal,
   loginLocal,
   signUpLocal,
+  addReview,
 };
