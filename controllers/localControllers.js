@@ -1,4 +1,61 @@
 const Local = require("../models/Locals");
+const jwt = require("jsonwebtoken");
+
+const createToken = (_id) => {
+  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "1h" });
+};
+
+const loginLocal = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const local = await Local.login(email, password);
+    //create token
+    const token = createToken(local._id);
+
+    res.status(200).json({
+      email,
+      token,
+      pic: local.pic,
+      firstname: local.firstname,
+      lastname: local.lastname,
+      city: local.city,
+    });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const signUpLocal = async (req, res) => {
+  const { email, password, city, phone, firstname, lastname } = req.body;
+  const pic = req.file.path;
+  console.log("req.body", req.body, pic);
+
+  try {
+    const local = await Local.signup(
+      email,
+      password,
+      city,
+      phone,
+      firstname,
+      lastname,
+      pic
+    );
+    console.log("2ndlocal", local);
+    //create token
+    const token = createToken(local._id);
+    res.status(200).json({
+      email: local.email,
+      token,
+      pic: local.pic,
+      firstname: local.firstname,
+      lastname: local.lastname,
+      city: local.city,
+    });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
 const getAllLocals = async (req, res) => {
   try {
@@ -139,10 +196,24 @@ const deleteLocal = async (req, res) => {
   }
 };
 
+const addReview = (req , res) => {
+  Local.findById(req.params.id, (err , local) => {
+    if(err) return res.status(500).send(err);
+    local.reviews.push(req.body.review);
+    local.save((err , updateLocal) => {
+      if(err) return res.status(500).send(err);
+      res.send(updateLocal)
+    })
+  })
+}
+
 module.exports = {
   getAllLocals,
   getOneLocal,
   createLocal,
   updateLocal,
   deleteLocal,
+  loginLocal,
+  signUpLocal,
+  addReview,
 };
