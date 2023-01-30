@@ -1,8 +1,8 @@
 const Local = require("../models/Locals");
 const jwt = require("jsonwebtoken");
 
-const createToken = (_id) => {
-  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "1h" });
+const createToken = (id) => {
+  return jwt.sign({ id }, process.env.SECRET, { expiresIn: "1h" });
 };
 
 const loginLocal = async (req, res) => {
@@ -11,7 +11,7 @@ const loginLocal = async (req, res) => {
   try {
     const local = await Local.login(email, password);
     //create token
-    const token = createToken(local._id);
+    const token = createToken(local.id);
 
     res.status(200).json({
       email,
@@ -43,7 +43,7 @@ const signUpLocal = async (req, res) => {
     );
     console.log("2ndlocal", local);
     //create token
-    const token = createToken(local._id);
+    const token = createToken(local.id);
     res.status(200).json({
       email: local.email,
       token,
@@ -196,16 +196,16 @@ const deleteLocal = async (req, res) => {
   }
 };
 
-const addReview = (req , res) => {
-  Local.findById(req.params.id, (err , local) => {
-    if(err) return res.status(500).send(err);
+const addReview = (req, res) => {
+  Local.findById(req.params.id, (err, local) => {
+    if (err) return res.status(500).send(err);
     local.reviews.push(req.body.review);
-    local.save((err , updateLocal) => {
-      if(err) return res.status(500).send(err);
-      res.send(updateLocal)
-    })
-  })
-}
+    local.save((err, updateLocal) => {
+      if (err) return res.status(500).send(err);
+      res.send(updateLocal);
+    });
+  });
+};
 
 module.exports = {
   getAllLocals,
