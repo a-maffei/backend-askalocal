@@ -1,8 +1,8 @@
 const Users = require("../models/Users.js");
 const jwt = require("jsonwebtoken");
 
-const createToken = (_id) => {
-  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "1h" });
+const createToken = (id) => {
+  return jwt.sign({ id }, process.env.SECRET, { expiresIn: "1h" });
 };
 
 //login
@@ -12,7 +12,7 @@ const loginUser = async (req, res) => {
   try {
     const user = await Users.login(email, password);
     //create token
-    const token = createToken(user._id);
+    const token = createToken(user.id);
 
     res.status(200).json({
       email,
@@ -29,9 +29,9 @@ const loginUser = async (req, res) => {
 
 //signup user
 const signUpUser = async (req, res) => {
+  console.log(req);
   const { email, password, city, phone, firstname, lastname } = req.body;
   const pic = req.file.path;
-
   try {
     const user = await Users.signup(
       email,
@@ -42,9 +42,9 @@ const signUpUser = async (req, res) => {
       lastname,
       pic
     );
-    console.log(user);
+    console.log("user", user);
     //create token
-    const token = createToken(user._id);
+    const token = createToken(user.id);
     res.status(200).json({
       email,
       token,
@@ -119,7 +119,7 @@ const updateUser = async (req, res) => {
       pic,
     } = req.body;
     const user = await Users.findByIdAndUpdate(
-      { _id: req.params.id },
+      { id: req.params.id },
       { firstname: firstname },
       { lastname: lastname },
       { email: email },

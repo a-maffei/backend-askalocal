@@ -47,6 +47,7 @@ const UserSchema = new Schema({
   // },
   pic: {
     type: String,
+    required: true,
     /*     data: Buffer,
     contentType: String, */
   },

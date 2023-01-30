@@ -91,7 +91,7 @@ const updateLocal = async (req, res) => {
 
   try {
     const updatedLocal = await Local.updateOne(
-      { _id: req.params.id },
+      { id: req.params.id },
       {
         $set: {
           firstname,

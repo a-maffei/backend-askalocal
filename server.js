@@ -18,6 +18,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: true }));
 
 app.use(morgan("dev"));
+
+app.disable("etag");
 // morgan.token("body", (req) => {
 //   return JSON.stringify(req.body);
 //});
