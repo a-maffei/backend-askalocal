@@ -145,10 +145,10 @@ const updateLocal = async (req, res) => {
     serviceP,
     interviewP,
   } = req.body;
-
+  console.log(callP);
   try {
     const updatedLocal = await Local.updateOne(
-      { id: req.params.id },
+      { email: email },
       {
         $set: {
           firstname,
@@ -160,12 +160,14 @@ const updateLocal = async (req, res) => {
           pic,
           bio,
           language,
-          emailP,
-          callP,
-          flatP,
-          appointmentP,
-          serviceP,
-          interviewP,
+          categories: {
+            emailP,
+            callP,
+            flatP,
+            appointmentP,
+            serviceP,
+            interviewP,
+          },
         },
       }
     );
