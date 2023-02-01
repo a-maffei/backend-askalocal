@@ -1,10 +1,15 @@
 const express = require("express");
+const upload = require("../multerConfig");
+
 const {
   getAllLocals,
   getOneLocal,
   createLocal,
   updateLocal,
   deleteLocal,
+  addReview,
+  loginLocal,
+  signUpLocal,
 } = require("../controllers/localControllers");
 
 const app = express.Router();
