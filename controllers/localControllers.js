@@ -14,12 +14,40 @@ const loginLocal = async (req, res) => {
     const token = createToken(local.id);
 
     res.status(200).json({
-      email,
       token,
-      pic: local.pic,
+      email,
       firstname: local.firstname,
       lastname: local.lastname,
       city: local.city,
+      pic: local.pic,
+      bio: local.bio,
+      categories: {
+        emailP: {
+          textfield: local.categories.emailP.textfield,
+          price: local.categories.emailP.price,
+        },
+        callP: {
+          textfield: local.categories.callP.textfield,
+          price: local.categories.callP.price,
+        },
+        flatP: {
+          textfield: local.categories.flatP.textfield,
+          price: local.categories.flatP.price,
+        },
+        appointmentP: {
+          textfield: local.categories.appointmentP.textfield,
+          price: local.categories.appointmentP.price,
+        },
+        serviceP: {
+          textfield: local.categories.serviceP.textfield,
+          price: local.categories.serviceP.price,
+        },
+        interviewP: {
+          textfield: local.categories.interviewP.textfield,
+          price: local.categories.interviewP.price,
+        },
+      },
+      isComplete: local.isComplete,
     });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -27,7 +55,8 @@ const loginLocal = async (req, res) => {
 };
 
 const signUpLocal = async (req, res) => {
-  const { email, password, city, phone, firstname, lastname } = req.body;
+  const { email, password, city, phone, firstname, lastname, isComplete } =
+    req.body;
   const pic = req.file.path;
   console.log("req.body", req.body, pic);
 
@@ -39,7 +68,8 @@ const signUpLocal = async (req, res) => {
       phone,
       firstname,
       lastname,
-      pic
+      pic,
+      isComplete
     );
     console.log("2ndlocal", local);
     //create token
@@ -51,6 +81,7 @@ const signUpLocal = async (req, res) => {
       firstname: local.firstname,
       lastname: local.lastname,
       city: local.city,
+      isComplete: local.isComplete,
     });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -98,6 +129,7 @@ const createLocal = async (req, res) => {
     appointmentP,
     serviceP,
     interviewP,
+    isComplete,
   } = req.body;
 
   try {
@@ -117,6 +149,7 @@ const createLocal = async (req, res) => {
       appointmentP,
       serviceP,
       interviewP,
+      isComplete,
     });
     res.status(201).json({ success: true, newLocal });
   } catch (error) {
@@ -144,6 +177,7 @@ const updateLocal = async (req, res) => {
     appointmentP,
     serviceP,
     interviewP,
+    isComplete,
   } = req.body;
 
   try {
@@ -168,12 +202,29 @@ const updateLocal = async (req, res) => {
             serviceP,
             interviewP,
           },
+          isComplete,
         },
       }
     );
     res.status(200).json({
-      success: true,
-      updatedLocal,
+      firstname,
+      lastname,
+      email,
+      password,
+      phone,
+      city,
+      pic,
+      bio,
+      language,
+      categories: {
+        emailP,
+        callP,
+        flatP,
+        appointmentP,
+        serviceP,
+        interviewP,
+      },
+      isComplete,
     });
   } catch (error) {
     res.status(500).json({
