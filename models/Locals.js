@@ -127,6 +127,9 @@ const LocalSchema = new Schema({
       },
     },
   },
+  isComplete: {
+    type: Boolean,
+  },
 });
 
 /* FILTERS
@@ -162,7 +165,8 @@ LocalSchema.statics.signup = async function (
   phone,
   firstname,
   lastname,
-  pic
+  pic,
+  isComplete
 ) {
   const exists = await this.findOne({ email });
 
@@ -198,6 +202,7 @@ LocalSchema.statics.signup = async function (
     firstname,
     lastname,
     pic,
+    isComplete,
   });
 
   return local;
