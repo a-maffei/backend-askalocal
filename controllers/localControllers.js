@@ -253,6 +253,7 @@ const addReview = (req, res) => {
   Local.findById(req.params.id, (err, local) => {
     if (err) return res.status(500).send(err);
     local.reviews.push(req.body.review);
+    local.ratings.push(req.body.rating);
     local.save((err, updateLocal) => {
       if (err) return res.status(500).send(err);
       res.send(updateLocal);

@@ -53,6 +53,9 @@ const LocalSchema = new Schema({
   reviews: {
     type: [String],
   },
+  ratings: {
+    type: [Number],
+  },
   categories: {
     emailP: {
       category: {
