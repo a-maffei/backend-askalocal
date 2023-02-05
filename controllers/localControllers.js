@@ -90,7 +90,21 @@ const signUpLocal = async (req, res) => {
 
 const getAllLocals = async (req, res) => {
   try {
-    const locals = await Local.find();
+    const locals = await Local.find({ isComplete: true });
+    res.status(200).json({ success: true, locals });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error,
+    });
+  }
+};
+
+const getSampleLocals = async (req, res) => {
+  try {
+    const locals = await Local.aggregate([
+      { $match: { isComplete: true } },
+    ]).sample(10);
     res.status(200).json({ success: true, locals });
   } catch (error) {
     res.status(500).json({
@@ -263,6 +277,7 @@ const addReview = (req, res) => {
 
 module.exports = {
   getAllLocals,
+  getSampleLocals,
   getOneLocal,
   createLocal,
   updateLocal,

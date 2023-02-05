@@ -10,14 +10,15 @@ const {
   addReview,
   loginLocal,
   signUpLocal,
+  getSampleLocals,
 } = require("../controllers/localControllers");
 
 const app = express.Router();
 
 app.route("/").get(getAllLocals).post(createLocal).put(updateLocal);
+app.route("/sample").get(getSampleLocals);
 app.route("/:id").get(getOneLocal).delete(deleteLocal);
 app.route("/:id/review").post(addReview);
-
 app.post("/login", loginLocal);
 
 //signup
