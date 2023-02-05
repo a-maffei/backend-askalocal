@@ -10,6 +10,8 @@ const morgan = require("morgan");
 
 const userRoutes = require("./routes/userRoutes");
 const localRoutes = require("./routes/localRoutes");
+const conversationRoutes = require("./routes/conversationsRoutes");
+const messageRoutes = require("./routes/messagesRoutes");
 
 const PORT = process.env.PORT || 8080;
 
@@ -33,6 +35,8 @@ app.get("/", (req, res) => res.send("Welcome to Ask A Local"));
 
 app.use("/local", localRoutes);
 app.use("/user", userRoutes);
+app.use("/conversations", conversationRoutes);
+app.use("/messages", messageRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is listening on http://localhost:${PORT}`);

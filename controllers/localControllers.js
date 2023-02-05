@@ -112,6 +112,21 @@ const getOneLocal = async (req, res) => {
   }
 };
 
+const getOneLoacalWithParams = async (req, res) => {
+  try {
+    /*     console.log("QUERY", req.query);
+    const userId = req.query.userId;
+    console.log("USER ID", userId); */
+    console.log("OLA", req.params);
+    const user = await Local.findById(req.params.userId);
+    res.status(200).json({
+      user,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message ? error.message : error });
+  }
+};
+
 const createLocal = async (req, res) => {
   const {
     firstname,
@@ -269,4 +284,5 @@ module.exports = {
   loginLocal,
   signUpLocal,
   addReview,
+  getOneLoacalWithParams,
 };
