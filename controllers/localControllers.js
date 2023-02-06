@@ -104,7 +104,7 @@ const getSampleLocals = async (req, res) => {
   try {
     const locals = await Local.aggregate([
       { $match: { isComplete: true } },
-    ]).sample(10);
+    ]).sample(15);
     res.status(200).json({ success: true, locals });
   } catch (error) {
     res.status(500).json({
