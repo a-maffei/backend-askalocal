@@ -16,10 +16,10 @@ const {
 
 app.route("/").get(getAllUsers).post(createUser);
 
-app.route("/:id").get(getOneUser).put(updateUser).delete(deleteUser);
-
 //login
 app.post("/login", loginUser);
+
+app.route("/:id").get(getOneUser).put(updateUser).delete(deleteUser);
 
 //signup
 app.post("/signup", upload.single("pic"), signUpUser);
