@@ -10,13 +10,16 @@ const {
   addReview,
   loginLocal,
   signUpLocal,
+  getOneLocalWithParams,
   getSampleLocals,
 } = require("../controllers/localControllers");
 
 const userAuth = require("../middlewares/requireAuth");
 const localAuth = require("../middlewares/requireAuthLocal");
 
+
 const app = express.Router();
+
 
 app.route("/sample").get(getSampleLocals);
 app.post("/login", loginLocal);
@@ -31,5 +34,7 @@ app.route("/").get(getAllLocals).post(createLocal).put(updateLocal);
 
 app.route("/:id").get(getOneLocal).delete(deleteLocal);
 app.route("/:id/review").post(addReview);
+
+app.route("/local/:userId").get(getOneLocalWithParams);
 
 module.exports = app;
