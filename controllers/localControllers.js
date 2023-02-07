@@ -1,8 +1,8 @@
 const Local = require("../models/Locals");
 const jwt = require("jsonwebtoken");
 
-const createToken = (id) => {
-  return jwt.sign({ id }, process.env.SECRET, { expiresIn: "1h" });
+const createToken = (id, isLocal) => {
+  return jwt.sign({ id, isLocal }, process.env.SECRET, { expiresIn: "1h" });
 };
 
 const loginLocal = async (req, res) => {
@@ -11,8 +11,8 @@ const loginLocal = async (req, res) => {
   try {
     const local = await Local.login(email, password);
     //create token
-    const token = createToken(local.id);
-
+    const token = createToken(local.id, local.isLocal);
+    console.log("LOCAL CONTR", local);
     res.status(200).json({
       token,
       email,
@@ -55,10 +55,17 @@ const loginLocal = async (req, res) => {
 };
 
 const signUpLocal = async (req, res) => {
-  const { email, password, city, phone, firstname, lastname, isComplete } =
-    req.body;
+  const {
+    email,
+    password,
+    city,
+    phone,
+    firstname,
+    lastname,
+    isComplete,
+    isLocal,
+  } = req.body;
   const pic = req.file.path;
-  console.log("req.body", req.body, pic);
 
   try {
     const local = await Local.signup(
@@ -69,11 +76,12 @@ const signUpLocal = async (req, res) => {
       firstname,
       lastname,
       pic,
-      isComplete
+      isComplete,
+      isLocal
     );
     console.log("2ndlocal", local);
     //create token
-    const token = createToken(local.id);
+    const token = createToken(local.id, local.isLocal);
     res.status(200).json({
       email: local.email,
       token,
@@ -82,6 +90,7 @@ const signUpLocal = async (req, res) => {
       lastname: local.lastname,
       city: local.city,
       isComplete: local.isComplete,
+      isLocal,
     });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -112,7 +121,7 @@ const getOneLocal = async (req, res) => {
   }
 };
 
-const getOneLoacalWithParams = async (req, res) => {
+const getOneLocalWithParams = async (req, res) => {
   try {
     /*     console.log("QUERY", req.query);
     const userId = req.query.userId;
@@ -165,6 +174,7 @@ const createLocal = async (req, res) => {
       serviceP,
       interviewP,
       isComplete,
+      isLocal: true,
     });
     res.status(201).json({ success: true, newLocal });
   } catch (error) {
@@ -284,5 +294,5 @@ module.exports = {
   loginLocal,
   signUpLocal,
   addReview,
-  getOneLoacalWithParams,
+  getOneLocalWithParams,
 };

@@ -83,6 +83,21 @@ const getOneUser = async (req, res) => {
   }
 };
 
+const getOneUserWithParams = async (req, res) => {
+  try {
+    /*     console.log("QUERY", req.query);
+    const userId = req.query.userId;
+    console.log("USER ID", userId); */
+    console.log("OLA", req.params);
+    const user = await Users.findById(req.params.userId);
+    res.status(200).json({
+      user,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message ? error.message : error });
+  }
+};
+
 const createUser = async (req, res) => {
   try {
     const { firstname, lastname, email, password, phone, street, zip, city } =
@@ -160,4 +175,5 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
+  getOneUserWithParams,
 };

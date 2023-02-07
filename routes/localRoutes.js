@@ -10,13 +10,13 @@ const {
   addReview,
   loginLocal,
   signUpLocal,
-  getOneLoacalWithParams,
+  getOneLocalWithParams,
 } = require("../controllers/localControllers");
 
 const app = express.Router();
 
 app.route("/").get(getAllLocals).post(createLocal);
-app.route("/local/:userId").get(getOneLoacalWithParams);
+app.route("/local/:userId").get(getOneLocalWithParams);
 app.route("/:id").get(getOneLocal).put(updateLocal).delete(deleteLocal);
 app.route("/:id/review").post(addReview);
 

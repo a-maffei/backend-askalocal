@@ -12,11 +12,13 @@ const {
   createUser,
   updateUser,
   deleteUser,
+  getOneUserWithParams,
 } = require("../controllers/userController.js");
 
 app.route("/").get(getAllUsers).post(createUser);
 
 app.route("/:id").get(getOneUser).put(updateUser).delete(deleteUser);
+app.route("/user/:userId").get(getOneUserWithParams);
 
 //login
 app.post("/login", loginUser);
