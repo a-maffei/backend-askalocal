@@ -17,11 +17,11 @@ const {
 
 app.route("/").get(getAllUsers).post(createUser);
 
-app.route("/:id").get(getOneUser).put(updateUser).delete(deleteUser);
-app.route("/user/:userId").get(getOneUserWithParams);
-
 //login
 app.post("/login", loginUser);
+
+app.route("/:id").get(getOneUser).put(updateUser).delete(deleteUser);
+app.route("/user/:userId").get(getOneUserWithParams);
 
 //signup
 app.post("/signup", upload.single("pic"), signUpUser);

@@ -51,7 +51,10 @@ const LocalSchema = new Schema({
     type: String,
   },
   reviews: {
-    type: [String],
+    type: [[String, String]],
+  },
+  ratings: {
+    type: [Number],
   },
   categories: {
     emailP: {
