@@ -1,6 +1,6 @@
 # Ask A Local
 
-Ask A Local connects newcomers in a city with local native-speakers that can support them to accomplish day-to-day tasks such as attending official appointments, flat hunting, setting up contracts with service providers, and more.
+Ask A Local connects expats moving to a new country with locals that can support them with accomplishing tasks that require some form of communication in the official language––attending official appointments, flat hunting, setting up contracts with service providers, job search, and more.
 
 Check out the live project on Netlify ➡️ [Ask A Local](https://askalocal.netlify.app/).
 
