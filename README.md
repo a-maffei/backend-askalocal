@@ -59,7 +59,7 @@ _Everything_. This final project was a great way to practice, test, and expand w
 As an individual, I struggled the most with my perfectionism (which doesn't get along well with building an MVP in two weeks) and with the authentication flows. Right when I thought they were working smoothly, a new error would appear. I solved these issues through a mix of persistance, error handling, and collaboration with my teammates. As a group, we didn't have enough time to implement a chat component with Socket.io, which we were eager to add.
 
 **Things I learned through building this app:**
-Among others, working with more complex MongoDB collection schemas than I was used to, implementing authentication and authorization for two different user types,managing React forms that include both media and text, finding efficient ways for data to be passed from component to component in React. I also learned about how to foster effective and supportive group dynamics in high pressure and high speed environments.
+Among others, working with more complex MongoDB collection schemas than I was used to, implementing authentication and authorization for different user types, managing React forms that include both media and text, finding efficient ways for data to be passed from component to component in React. I also learned about how to foster effective and supportive group dynamics in high pressure and high speed environments.
 
 ## Wishes for V2
 
